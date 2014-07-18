@@ -30,7 +30,6 @@ public class EsperPatternMatch {
         simpleStatement.addListener(new UpdateListener() {
             @Override
             public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-                System.out.println("Event!");
                 for(EventBean e : newEvents){
                     System.out.println("[" + new Date().toString() + "] " + "phoneId: " + e.get("phoneId")
                             + " start: " + e.get("CallStart")

@@ -32,13 +32,10 @@ public class EsperFloatingWindow {
             }
         });
 
-
         for(int second =0 ; second < 10; second++){
             esperService.getEPRuntime().sendEvent(new PowerEvent("a", 100 - 10 * second ));
             System.out.println("[" + new Date().toString() + "] Sent: " + (100 - 10 * second) );
             sleep(900);
         }
     }
-
-
 }
