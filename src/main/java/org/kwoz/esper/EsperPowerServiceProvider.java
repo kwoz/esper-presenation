@@ -5,6 +5,7 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
 import org.kwoz.events.CallEvent;
 import org.kwoz.events.PowerEvent;
+import org.kwoz.events.TransmissionEvent;
 
 public class EsperPowerServiceProvider {
 
@@ -15,6 +16,7 @@ public class EsperPowerServiceProvider {
         esperConfig = new Configuration();
         esperConfig.addEventType("PowerEvent", PowerEvent.class);
         esperConfig.addEventType("CallEvent", CallEvent.class);
+        esperConfig.addEventType("TransmissionEvent", TransmissionEvent.class);
 
         esperService = EPServiceProviderManager.getDefaultProvider(esperConfig);
     }
