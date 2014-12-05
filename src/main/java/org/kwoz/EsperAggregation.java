@@ -10,20 +10,20 @@ import static java.lang.Thread.sleep;
 
 public class EsperAggregation {
 
-    private static final String AGGREGATION_QUERY = "select eNodebId, max(signalPower) " +
+    private static final String QUERY = "select eNodebId, max(signalPower) " +
             "from PowerEvent.win:time_batch( 2 sec ) " +
             "group by eNodebId";
 
     public static void main(String args[]) throws InterruptedException {
-        EPServiceProvider esperService = new EsperPowerServiceProvider().getEsperService();
+        EPServiceProvider esperService = new EsperPowerServiceProvider().getServiceProvider();
 
-        EPStatement simpleStatement = esperService.getEPAdministrator().createEPL(AGGREGATION_QUERY);
+        EPStatement statement = esperService.getEPAdministrator().createEPL(QUERY);
 
-        simpleStatement.addListener(new UpdateListener() {
+        statement.addListener(new UpdateListener() {
             @Override
             public void update(EventBean[] newEvents, EventBean[] oldEvents) {
-                for(EventBean e : newEvents){
-                    System.out.println("[" + new Date().toString() + "] " + "eNodebId: " + e.get("eNodebId")+ " value: " + e.get("max(signalPower)"));
+                for (EventBean e : newEvents) {
+                    System.out.println("[" + new Date().toString() + "] " + "eNodebId: " + e.get("eNodebId") + " value: " + e.get("max(signalPower)"));
                 }
             }
         });

@@ -3,26 +3,24 @@ package org.kwoz.esper;
 import com.espertech.esper.client.Configuration;
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
-import org.kwoz.events.CallEvent;
-import org.kwoz.events.PowerEvent;
-import org.kwoz.events.TransmissionEvent;
+import org.kwoz.events.*;
 
 public class EsperPowerServiceProvider {
 
-    private final Configuration esperConfig;
-    private final EPServiceProvider esperService;
+    private final EPServiceProvider serviceProvider;
 
     public EsperPowerServiceProvider(){
-        esperConfig = new Configuration();
+        Configuration esperConfig = new Configuration();
+        esperConfig.addEventType("Example", ExampleEvent.class);
         esperConfig.addEventType("PowerEvent", PowerEvent.class);
-        esperConfig.addEventType("CallEvent", CallEvent.class);
-        esperConfig.addEventType("TransmissionEvent", TransmissionEvent.class);
+        esperConfig.addEventType("Trades", TradeEvent.class);
+        //esperConfig.addEventType("CallEvent", CallEvent.class);
+        //esperConfig.addEventType("TransmissionEvent", TransmissionEvent.class);
 
-        esperService = EPServiceProviderManager.getDefaultProvider(esperConfig);
+        serviceProvider = EPServiceProviderManager.getDefaultProvider(esperConfig);
     }
 
-    public EPServiceProvider getEsperService(){
-        return esperService;
+    public EPServiceProvider getServiceProvider(){
+        return serviceProvider;
     }
-
 }

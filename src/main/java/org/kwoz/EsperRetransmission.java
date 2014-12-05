@@ -5,7 +5,6 @@ import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.EventBean;
 import com.espertech.esper.client.UpdateListener;
 import org.kwoz.esper.EsperPowerServiceProvider;
-import org.kwoz.events.CallEvent;
 import org.kwoz.events.TransmissionEvent;
 
 import java.util.Date;
@@ -31,7 +30,7 @@ public class EsperRetransmission {
             ")";
 
     public static void main(String args[]) throws InterruptedException {
-        EPServiceProvider esperService = new EsperPowerServiceProvider().getEsperService();
+        EPServiceProvider esperService = new EsperPowerServiceProvider().getServiceProvider();
 
         EPStatement simpleStatement = esperService.getEPAdministrator().createEPL(FLOATING_WINDOW_QUERY);
 

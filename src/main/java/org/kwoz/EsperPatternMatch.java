@@ -23,7 +23,7 @@ public class EsperPatternMatch {
             ")" ;
 
     public static void main(String args[]) throws InterruptedException {
-        EPServiceProvider esperService = new EsperPowerServiceProvider().getEsperService();
+        EPServiceProvider esperService = new EsperPowerServiceProvider().getServiceProvider();
 
         EPStatement simpleStatement = esperService.getEPAdministrator().createEPL(FLOATING_WINDOW_QUERY);
 

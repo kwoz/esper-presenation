@@ -16,7 +16,7 @@ public class EsperFloatingWindow {
             "output snapshot every 1 sec";
 
     public static void main(String args[]) throws InterruptedException {
-        EPServiceProvider esperService = new EsperPowerServiceProvider().getEsperService();
+        EPServiceProvider esperService = new EsperPowerServiceProvider().getServiceProvider();
 
         EPStatement simpleStatement = esperService.getEPAdministrator().createEPL(FLOATING_WINDOW_QUERY);
 
@@ -37,5 +37,7 @@ public class EsperFloatingWindow {
             System.out.println("[" + new Date().toString() + "] Sent: " + (100 - 10 * second) );
             sleep(900);
         }
+
+        sleep(5000);
     }
 }
