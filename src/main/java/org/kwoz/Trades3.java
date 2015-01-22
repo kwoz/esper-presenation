@@ -19,22 +19,24 @@ public class Trades3 {
         EPServiceProvider serviceProvider = new EsperPowerServiceProvider().getServiceProvider();
 
 
-        EPStatement statement = serviceProvider.getEPAdministrator().createEPL("SELECT avg(price)\n" +
+        EPStatement statement = serviceProvider.getEPAdministrator().createEPL("SELECT name, avg(price)\n" +
                 "FROM Trades.win:time(5 minutes)\n" +
-                "WHERE name = \"złoto\"\n" +
+                "GROUP BY name\n" +
                 "OUTPUT SNAPSHOT EVERY 1 second");
+
+        final EPRuntime epRuntime = serviceProvider.getEPRuntime();
 
         statement.addListener(new UpdateListener() {
             @Override
             public void update(EventBean[] newEvents, EventBean[] oldEvents) {
                 for (EventBean e : newEvents) {
                     //System.out.format("%s %f %f %f \n", e.get("name"), e.get("avg(price)"), e.get("max(price)"), e.get("min(price)"));
-                    System.out.println(e.get("name"));
+                    System.out.println(epRuntime.getCurrentTime() + " " + e.get("name") + " " + e.get("avg(price)"));
                 }
             }
         });
 
-        final EPRuntime epRuntime = serviceProvider.getEPRuntime();
+
         epRuntime.sendEvent(new TimerControlEvent(TimerControlEvent.ClockType.CLOCK_EXTERNAL));
 
         final long t0 = System.currentTimeMillis();
